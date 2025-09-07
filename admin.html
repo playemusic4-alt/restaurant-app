@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Console</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        input, button { width: 100%; padding: 10px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Admin Console</h1>
+
+    <div class="form-group">
+        <input type="text" id="foodName" placeholder="Food Name" />
+    </div>
+    <div class="form-group">
+        <input type="number" id="foodPrice" placeholder="Price" />
+    </div>
+    <div class="form-group">
+        <input type="url" id="foodImage" placeholder="Image URL (optional)" />
+    </div>
+    <button onclick="addItem()">Add Food Item</button>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyABf4BYpvETlUFKqn70XDd0qIYBJoML0Jo",
+            authDomain: "restaurant-app-demo-efa66.firebaseapp.com",
+            projectId: "restaurant-app-demo-efa66",
+            storageBucket: "restaurant-app-demo-efa66.firebasestorage.app",
+            messagingSenderId: "772573783622",
+            appId: "1:772573783622:web:a22bd96d5874617ba1cc47"
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        function addItem() {
+            const name = document.getElementById('foodName').value.trim();
+            const price = parseFloat(document.getElementById('foodPrice').value);
+            const image = document.getElementById('foodImage').value.trim();
+
+            if (!name || !price) {
+                alert("Please fill name and price.");
+                return;
+            }
+
+            db.collection("menu").add({
+                name: name,
+                price: price,
+                image: image || ""
+            }).then(() => {
+                alert("Item added successfully!");
+                document.getElementById('foodName').value = "";
+                document.getElementById('foodPrice').value = "";
+                document.getElementById('foodImage').value = "";
+            }).catch(error => {
+                console.error("Error adding item:", error);
+                alert("Error adding item.");
+            });
+        }
+    </script>
+</body>
+</html>
