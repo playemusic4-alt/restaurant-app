@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Restaurant Menu</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Place Your Order</h1>
+        <div class="user-info">
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Your Name" required />
+            </div>
+            <div class="form-group">
+                <input type="tel" id="phone" placeholder="Phone Number" required />
+            </div>
+            <div class="form-group">
+                <input type="text" id="table" placeholder="Table Number" required />
+            </div>
+        </div>
+
+        <div class="menu-grid" id="menuList">
+            Loading menu...
+        </div>
+
+        <div class="total-price" id="totalPrice">Total: ₹0</div>
+
+        <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
